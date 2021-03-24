@@ -1,0 +1,28 @@
+{
+    "options": [
+        {
+            "_id":1,
+            "avatar":"RN",
+            "name":"Rooster Huston",
+            "email":"abc@gmail.com",
+            "company":"Estra Boutique Ltd.",
+            "address": "gasgsdgasdf"
+        },
+        {   "_id":2,
+            "avatar":"MH",
+            "name":"Mike Huston",
+            "email":"abc@gmail.com",
+            "company":"Estra  Ltd.",
+            "address": "gasgsdgasdf sfsfasfas"
+        },
+        {
+            "_id":3,
+            "avatar":"JN",
+            "name":"John Nike",
+            "email":"abc@gmail.com",
+            "company":"Estra Boutique .",
+            "address": "gasgsdgasdffd fdfadfasdf"
+        }
+       
+    ]
+}

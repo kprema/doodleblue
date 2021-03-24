@@ -1,21 +1,20 @@
 import React from 'react';
-import {faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-
-export default class Header extends React.Component {
+export default class EditForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShown: false,
-      name: '',
-      email: '',
-      address: '',
-      avatar: '',
+      isShown: true,
+      avatar: props.userDetails.avatar,
+      name: props.userDetails.name,
+      address: props.userDetails.address,
+      company: props.userDetails.company,
+      email: props.userDetails.email,
     };
   }
 
   handleInput = (e) => {
+    console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -26,51 +25,32 @@ export default class Header extends React.Component {
     });
   };
 
-  addItem = (e) => {
+  editForm = (e, editData) => {
     e.preventDefault();
-    const details = {
+    console.log(editData);
+    const editdetails = {
       avatar: this.state.avatar,
       name: this.state.name,
       email: this.state.email,
       address: this.state.address,
       company: this.state.company,
     };
-    this.props.addItem(details);
+    this.props.editForm(editdetails);
   };
+
   render() {
     return (
       <div>
-        <div>
-          <div className='row justify-content-start title'>
-            <div className='col-sm col-md-3'>
-              <h3>Contacts</h3>
-              <p>Welcome to FirstCRM Contact page</p>
-            </div>
-            <div className='col-sm align-self-center'>
-              <span>
-                Sort by: <b>Date Created</b>
-              </span>
-            </div>
-          </div>
-        </div>
-
         <div className='row search'>
           <div className='col-xs-12'>
-            <input type='text' placeholder='Search contacts' name='search' />
-
-            <FontAwesomeIcon icon={faSearch} />
-
-            <button class='btn-custom' onClick={this.handleClick}>
-              <FontAwesomeIcon icon={faPlus} /> Add Contact
-            </button>
-
+            <h4>Edit Fields</h4>
             <div style={{marginTop: '20px', marginBottom: '20px'}}>
               {this.state.isShown && (
-                <form onSubmit={this.addItem}>
+                <form onSubmit={this.editForm}>
                   <input
                     name='avatar'
                     type='text'
-                    placeholder='Please enter the Avartar'
+                    value={this.state.avatar}
                     onChange={this.handleInput}
                     required
                   />
@@ -78,32 +58,32 @@ export default class Header extends React.Component {
                     name='name'
                     type='text'
                     onChange={this.handleInput}
-                    placeholder='Please enter the Name'
+                    value={this.state.name}
                     required
                   />
                   <input
                     name='email'
                     type='email'
-                    placeholder='Please enter the Email'
+                    value={this.state.email}
                     onChange={this.handleInput}
                     required
                   />
                   <input
                     name='company'
                     type='text'
-                    placeholder='Please enter the Company'
+                    value={this.state.company}
                     onChange={this.handleInput}
                     required
                   />
                   <input
                     name='address'
                     type='text'
-                    placeholder='Please enter the Address'
+                    value={this.state.address}
                     onChange={this.handleInput}
                     required
                   />
                   <button class='btn-custom' type='submit'>
-                    {this.props.addname}
+                    Update
                   </button>
                 </form>
               )}

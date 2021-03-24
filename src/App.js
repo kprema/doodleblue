@@ -1,32 +1,34 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import RemoveAll from './components/RemoveAll';
-import AddOption from './components/AddOption';
-import Option from './components/Option';
 import Options from './components/Options';
-import Action from './components/Action';
+
 import Header from './components/Header';
+import Navigation from './components/Navigation';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Details from './components/Details';
+import data from './data.json';
+import EditForm from './components/EditForm';
 
 class App extends React.Component {
   state = {
-    options: ['one', 'two', 'three'],
+    options: data.options,
     itemindex: -1,
     editableOption: false,
-    addname: 'AddITEM',
+    addname: 'Submit',
+    editUser: undefined,
   };
 
-  addItem = (option) => {
-    if (!option) {
+  addItem = (details) => {
+    if (!details) {
       alert('Please enter the value');
       return 'Please enter the value';
-    } else if (this.state.options.indexOf(option) > -1) {
+    } else if (this.state.options.indexOf(details) > -1) {
       alert("There is 'NO' update");
       return 'The value already exists';
     } else if (this.state.itemindex > -1) {
-      this.state.options[this.state.itemindex] = option;
+      this.state.options[this.state.itemindex] = details;
       this.setState({
         itemindex: -1,
         addname: 'AddItem',
@@ -34,7 +36,7 @@ class App extends React.Component {
     } else {
       this.setState((prevState) => {
         return {
-          options: prevState.options.concat(option),
+          options: prevState.options.concat(details),
         };
       });
     }
@@ -56,50 +58,38 @@ class App extends React.Component {
     }));
   };
 
-  editOption = (e) => {
-    document.getElementsByName('optionItem')[0].value =
-      e.target.attributes[0].value;
-    const editItemIndex = this.state.options.indexOf(
-      e.target.attributes[0].value
-    );
-
+  editOption = (optionToEdit, e) => {
     this.setState({
-      addname: 'update',
-      itemindex: editItemIndex,
+      editUser: optionToEdit,
     });
+  };
+  editableOption = (editdetails) => {
+    console.log(editdetails);
   };
 
   render() {
-    const title = 'Todo App using MERN';
     return (
-      <div className='container'>
-        <Header title={title} />
-        <Action hasOption={this.state.options.length > 0} />
-        <Options
-          options={this.state.options}
-          deleteCurrentitem={this.deleteCurrentitem}
-          editOption={this.editOption}
-          editableOption={this.state.editableOption}
-        />
-        <AddOption addItem={this.addItem} addname={this.state.addname} />
-        <RemoveAll removeAll={this.removeAll} />
+      <div>
+        <Navigation></Navigation>
+        <div className='container mobile'>
+          <Header addItem={this.addItem} addname={this.state.addname} />
+          <div className='row'>
+            <Options
+              options={this.state.options}
+              deleteCurrentitem={this.deleteCurrentitem}
+              editOption={this.editOption}
+              editableOption={this.state.editableOption}
+            />
+            <Details></Details>
+          </div>
+          {this.state.editUser && (
+            <EditForm userDetails={this.state.editUser}></EditForm>
+          )}
+          <RemoveAll removeAll={this.removeAll} />
+        </div>
       </div>
     );
   }
 }
-
-<div className='container'>
-  <Header />
-
-  <Action />
-
-  <Options />
-
-  <Option />
-
-  <AddOption />
-
-  <RemoveAll />
-</div>;
 
 export default App;
