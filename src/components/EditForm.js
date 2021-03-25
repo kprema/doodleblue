@@ -25,17 +25,24 @@ export default class EditForm extends React.Component {
     });
   };
 
-  editForm = (e, editData) => {
+  editForm = (e) => {
     e.preventDefault();
-    console.log(editData);
     const editdetails = {
       avatar: this.state.avatar,
       name: this.state.name,
       email: this.state.email,
       address: this.state.address,
       company: this.state.company,
+      id: this.state._id,
     };
     this.props.editForm(editdetails);
+    this.setState({
+      avatar: '',
+      name: '',
+      company: '',
+      email: '',
+      address: '',
+    });
   };
 
   render() {
@@ -82,7 +89,7 @@ export default class EditForm extends React.Component {
                     onChange={this.handleInput}
                     required
                   />
-                  <button class='btn-custom' type='submit'>
+                  <button class='btn-custom update' type='submit'>
                     Update
                   </button>
                 </form>

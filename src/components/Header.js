@@ -36,6 +36,13 @@ export default class Header extends React.Component {
       company: this.state.company,
     };
     this.props.addItem(details);
+    this.setState({
+      avatar: '',
+      name: '',
+      company: '',
+      email: '',
+      address: '',
+    });
   };
   render() {
     return (
@@ -66,46 +73,48 @@ export default class Header extends React.Component {
 
             <div style={{marginTop: '20px', marginBottom: '20px'}}>
               {this.state.isShown && (
-                <form onSubmit={this.addItem}>
-                  <input
-                    name='avatar'
-                    type='text'
-                    placeholder='Please enter the Avartar'
-                    onChange={this.handleInput}
-                    required
-                  />
-                  <input
-                    name='name'
-                    type='text'
-                    onChange={this.handleInput}
-                    placeholder='Please enter the Name'
-                    required
-                  />
-                  <input
-                    name='email'
-                    type='email'
-                    placeholder='Please enter the Email'
-                    onChange={this.handleInput}
-                    required
-                  />
-                  <input
-                    name='company'
-                    type='text'
-                    placeholder='Please enter the Company'
-                    onChange={this.handleInput}
-                    required
-                  />
-                  <input
-                    name='address'
-                    type='text'
-                    placeholder='Please enter the Address'
-                    onChange={this.handleInput}
-                    required
-                  />
-                  <button class='btn-custom' type='submit'>
-                    {this.props.addname}
-                  </button>
-                </form>
+                <div>
+                  <form onSubmit={this.addItem}>
+                    <input
+                      name='avatar'
+                      type='text'
+                      placeholder='Please enter the Avartar'
+                      onChange={this.handleInput}
+                      required
+                    />
+                    <input
+                      name='name'
+                      type='text'
+                      onChange={this.handleInput}
+                      placeholder='Please enter the Name'
+                      required
+                    />
+                    <input
+                      name='email'
+                      type='email'
+                      placeholder='Please enter the Email'
+                      onChange={this.handleInput}
+                      required
+                    />
+                    <input
+                      name='company'
+                      type='text'
+                      placeholder='Please enter the Company'
+                      onChange={this.handleInput}
+                      required
+                    />
+                    <input
+                      name='address'
+                      type='text'
+                      placeholder='Please enter the Address'
+                      onChange={this.handleInput}
+                      required
+                    />
+                    <button class='btn-custom update' type='submit'>
+                      {this.props.addname}
+                    </button>
+                  </form>
+                </div>
               )}
             </div>
           </div>

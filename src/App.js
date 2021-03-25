@@ -2,14 +2,15 @@ import React from 'react';
 
 import RemoveAll from './components/RemoveAll';
 import Options from './components/Options';
-
+import Details from './components/Details';
+import EditForm from './components/EditForm';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Details from './components/Details';
+
 import data from './data.json';
-import EditForm from './components/EditForm';
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,8 @@ class App extends React.Component {
     editableOption: false,
     addname: 'Submit',
     editUser: undefined,
+    currentItem: '',
+    isShown: false,
   };
 
   addItem = (details) => {
@@ -58,13 +61,25 @@ class App extends React.Component {
     }));
   };
 
-  editOption = (optionToEdit, e) => {
+  editOption = (optionToEdit) => {
     this.setState({
       editUser: optionToEdit,
+      currentIndex: optionToEdit._id,
     });
   };
-  editableOption = (editdetails) => {
-    console.log(editdetails);
+
+  editForm = (editdetails) => {
+    const currentIndex = this.state.currentIndex - 1;
+    const editDetails = editdetails;
+    this.state.options.splice(currentIndex, 1, editDetails);
+
+    this.setState({
+      name: editdetails.name,
+      address: editdetails.address,
+      company: editdetails.company,
+      email: editdetails.email,
+      id: editdetails._id,
+    });
   };
 
   render() {
@@ -83,7 +98,9 @@ class App extends React.Component {
             <Details></Details>
           </div>
           {this.state.editUser && (
-            <EditForm userDetails={this.state.editUser}></EditForm>
+            <EditForm
+              editForm={this.editForm}
+              userDetails={this.state.editUser}></EditForm>
           )}
           <RemoveAll removeAll={this.removeAll} />
         </div>

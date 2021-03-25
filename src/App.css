@@ -11,6 +11,9 @@ li, ul{
     padding-left: 5px;
     padding-right: 5px;
   }
+  .search input{
+    margin-bottom: 15px;
+  }
 }
 .btn-custom{
   padding: 10px 30px;
@@ -63,13 +66,16 @@ button.btn-custom{
 .search{
   margin-bottom: 40px;
 }
-.search  input{
+.search input{
   padding: 10px 20px;
     border-radius: 20px;
     width: 300px;
     background: #e9ecef;
     border: 0;
     margin-left: 8px;
+}
+.search input:focus{
+  outline:0
 }
 li.d-flex.justify-content-between.table-list.align-items-center {
   padding-left: 20px;
@@ -92,6 +98,9 @@ li.d-flex.justify-content-between.table-list.align-items-center {
   margin-left: 60px;
   padding: 10px 30px 10px 60px;
   margin-top: 10px;
+ }
+ .search button.update{
+   padding-left: 35px;
  }
  .table-list {
    padding: 20px 0;
